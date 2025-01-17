@@ -1,7 +1,4 @@
-version: '3.1'
-
 services:
-
   mongo:
     image: mongo
     restart: always
@@ -25,7 +22,29 @@ services:
       ME_CONFIG_BASICAUTH: false
     networks:
       - app-net
+    depends_on:
+      - mongo
 
+  website:
+    build: ./CarPark
+    environment:
+      - MONGODB_URL=mongodb://root:example@localhost:27018
+      - MONGODB_DATABASE_NAME=carParkDB
+    networks:
+      - app-net
+    depends_on:
+      - mongo
+
+  nginx:
+    build: 
+      context: ./nginx
+    ports:
+      - "80:80"
+    networks:
+      - app-net
+    depends_on:
+      - website
+     
 networks:
   app-net:
     driver: bridge
