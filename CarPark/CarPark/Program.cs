@@ -1,15 +1,26 @@
+using MongoDB.Driver;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorPages();
+
+// MongoDB
+var mongoConnectionString = builder.Configuration["MONGODB_URL"] ??
+    throw new ArgumentException("MongoDb URL must be specified");
+
+var mongoDatabaseName = builder.Configuration["MONGODB_DATABASE_NAME"]
+    ?? throw new ArgumentException("MongoDb database name must be specified");
+
+var client = new MongoClient(mongoConnectionString);
+var database = client.GetDatabase(mongoDatabaseName);
+
+builder.Services.AddSingleton(database);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
