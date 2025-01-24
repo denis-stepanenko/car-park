@@ -1,0 +1,74 @@
+﻿@{
+    const int countOfVisiblePages = 15;
+
+    int start = Math.Min(Math.Max(1, Model.PageNumber - 2), Model.TotalPages - countOfVisiblePages);
+    int end = Math.Min(start + countOfVisiblePages, Model.TotalPages);
+
+    bool showFirstPage = start > 1;
+    bool showLastPage = end < Model.TotalPages;
+
+    if (Model.TotalPages <= countOfVisiblePages)
+    {
+        start = 1;
+        end = Model.TotalPages;
+        showFirstPage = false;
+        showLastPage = false;
+    }
+
+    bool hasPreviousPage = Model.PageNumber > 1;
+    bool hasNextPage = Model.PageNumber < Model.TotalPages;
+}
+
+﻿<nav>
+    <ul class="pagination justify-content-center">
+
+        <li class="page-item @(!hasPreviousPage ? "disabled" : "")">
+            <a asp-action="Index"
+               asp-route-pageNumber="@(Model.PageNumber - 1)"
+               class="page-link">Назад</a>
+        </li>
+
+        @if (showFirstPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index" asp-route-pageNumber="1">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">...</a>
+            </li>
+        }
+
+        @for (int i = start; i <= end; i++)
+        {
+            if (Model.PageNumber != i)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-pageNumber="@i">@i</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">@i</a>
+                </li>
+            }
+        }
+
+        @if (showLastPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="#">...</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" asp-action="Index" asp-route-pageNumber="@Model.TotalPages">@Model.TotalPages</a>
+            </li>
+        }
+
+        <li class="page-item @(!hasNextPage ? "disabled" : "")">
+            <a asp-action="Index"
+               asp-route-pageNumber="@(Model.PageNumber + 1)"
+               class="page-link">Вперед</a>
+        </li>
+
+    </ul>
+</nav>
