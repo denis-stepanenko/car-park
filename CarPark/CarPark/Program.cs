@@ -2,10 +2,19 @@ using CarPark.Repos.Interfaces;
 using CarPark.Repos;
 using MongoDB.Driver;
 using CarPark.Services;
+using Microsoft.Extensions.WebEncoders;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
+
+// Изменяем настройки чтобы кириллица не преобразовывалась в unicode hex codes
+builder.Services.Configure<WebEncoderOptions>(options =>
+{
+    options.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All);
+});
 
 // MongoDB
 var mongoConnectionString = builder.Configuration["MONGODB_URL"] ??
