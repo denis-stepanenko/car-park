@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarPark", "CarPark\CarPark.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarPark.UnitTests", "CarPark.UnitTests\CarPark.UnitTests.csproj", "{8D39D7C9-E58A-4D22-B315-D5C48EA08A35}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarPark.IntegrationTests", "CarPark.IntegrationTests\CarPark.IntegrationTests.csproj", "{AF723EE6-C8E2-416D-959E-EF837E3DC11A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
