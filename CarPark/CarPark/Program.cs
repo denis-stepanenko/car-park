@@ -1,4 +1,7 @@
+using CarPark.Repos.Interfaces;
+using CarPark.Repos;
 using MongoDB.Driver;
+using CarPark.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,10 @@ var client = new MongoClient(mongoConnectionString);
 var database = client.GetDatabase(mongoDatabaseName);
 
 builder.Services.AddSingleton(database);
+
+builder.Services.AddScoped<ICarRepo, CarRepo>();
+
+builder.Services.AddScoped<CarService>();
 
 var app = builder.Build();
 
