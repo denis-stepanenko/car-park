@@ -14,7 +14,7 @@ namespace CarPark.Repos
             _collection = database.GetCollection<T>(typeof(T).Name);
         }
 
-        public async Task<T> GetByIdAsync(string id)
+        public async Task<T?> GetByIdAsync(string id)
             => await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
         public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? expression = null, int skip = 0, int limit = 0)
