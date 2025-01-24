@@ -14,6 +14,7 @@ namespace CarPark.IntegrationTests
         [Theory]
         [InlineData("/")]
         [InlineData("/Index")]
+        [InlineData("/Cars")]
         public async Task Should_ReturnSuccessAndCorrectContentType_WhenCallEveryEndpoint(string url)
         {
             var client = _factory.CreateClient();
