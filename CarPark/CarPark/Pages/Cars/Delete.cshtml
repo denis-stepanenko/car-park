@@ -1,0 +1,11 @@
+﻿@page "{id}"
+@model CarPark.Pages.Cars.DeleteModel
+@{
+}
+<form method="post">
+    <input type="text" asp-for="Item.Id" hidden>
+    <h3>Вы действительно хотите удалить @Model.Item?.Make @Model.Item?.Name?</h3>
+
+    <button type="submit" class="btn btn-success">Удалить</button>
+    <a class="btn btn-light" asp-page="Index">Отмена</a>
+</form>
