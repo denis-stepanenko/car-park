@@ -1,0 +1,32 @@
+﻿@page
+@model CarPark.Pages.Cars.IndexModel
+@{
+}
+
+<p><a class="btn btn-success" asp-page="Create">Добавить</a></p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Производитель</th>
+            <th scope="col">Наименование</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Data.Items)
+        {
+            <tr>
+                <td>@item.Make</td>
+                <td>@item.Name</td>
+                <td>
+                    <a class="btn btn-success" asp-page="Edit" asp-route-id="@item.Id">Изменить</a>
+                    <a class="btn btn-warning" asp-page="Delete" asp-route-id="@item.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@await Html.PartialAsync("_Pagination", new { PageNumber = Model.Data.PageNumber, TotalPages = Model.Data.TotalPages })
