@@ -1,6 +1,7 @@
 ﻿@page "{id}"
 @model CarPark.Pages.Cars.EditModel
 @{
+    ViewData["Title"] = $"Изменение {Model.Item.Make} - {Model.Item.Name}";
 }
 
 <form method="post">

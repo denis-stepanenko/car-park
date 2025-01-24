@@ -1,7 +1,9 @@
 ﻿@page "{id}"
 @model CarPark.Pages.Cars.DeleteModel
 @{
+    ViewData["Title"] = $"Удаление {Model.Item.Make} - {Model.Item.Name}";
 }
+
 <form method="post">
     <input type="text" asp-for="Item.Id" hidden>
     <h3>Вы действительно хотите удалить @Model.Item?.Make @Model.Item?.Name?</h3>
