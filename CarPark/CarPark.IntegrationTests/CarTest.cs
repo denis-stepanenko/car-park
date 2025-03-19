@@ -46,7 +46,7 @@ namespace CarPark.IntegrationTests
                 .SingleOrDefault()?
                 .InnerHtml;
 
-            Assert.Contains("Такой автомобиль уже существует", validationSummaryErrors);
+            Assert.Contains("РўР°РєРѕР№ Р°РІС‚РѕРјРѕР±РёР»СЊ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚", validationSummaryErrors);
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace CarPark.IntegrationTests
                 .SingleOrDefault()?
                 .InnerHtml;
 
-            Assert.Contains("Такой автомобиль уже существует", validationSummaryErrors);
+            Assert.Contains("РўР°РєРѕР№ Р°РІС‚РѕРјРѕР±РёР»СЊ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚", validationSummaryErrors);
         }
 
         [Fact]
@@ -124,8 +124,8 @@ namespace CarPark.IntegrationTests
                 .Where(n => n.HasClass("field-validation-error"))
                 .Select(x => x.InnerHtml);
 
-            Assert.Contains("Введите наименование", validationErrors);
-            Assert.Contains("Введите производителя", validationErrors);
+            Assert.Contains("Р’РІРµРґРёС‚Рµ РЅР°РёРјРµРЅРѕРІР°РЅРёРµ", validationErrors);
+            Assert.Contains("Р’РІРµРґРёС‚Рµ РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЏ", validationErrors);
         }
 
         [Theory]
@@ -141,7 +141,7 @@ namespace CarPark.IntegrationTests
             var html = await response.Content.ReadAsStringAsync();
 
             Assert.Equal("text/html; charset=utf-8", response.Content?.Headers?.ContentType?.ToString());
-            Assert.Contains("удалить", html);
+            Assert.Contains("СѓРґР°Р»РёС‚СЊ", html);
             Assert.Contains(expected, html);
         }
 
